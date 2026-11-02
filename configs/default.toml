@@ -1,0 +1,13 @@
+[split]
+validation_size = 0.1
+test_size = 0.1
+random_state = 42
+
+[model]
+ngram_min = 1
+ngram_max = 2
+min_df = 2
+max_features = 100000
+sublinear_tf = true
+C = 1.0
+max_iter = 1000

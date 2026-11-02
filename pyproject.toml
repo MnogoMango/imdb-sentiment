@@ -1,0 +1,55 @@
+[project]
+name = "imdb-sentiment"
+version = "0.1.0"
+description = "Reproducible IMDB sentiment classification with TF-IDF and logistic regression"
+authors = [{name = "Project contributors"}]
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dynamic = ["dependencies"]
+
+[tool.poetry]
+packages = [{include = "imdb_sentiment", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.14"
+numpy = ">=1.26,<2.3"
+pandas = ">=2.2,<3"
+scikit-learn = ">=1.6,<1.9"
+matplotlib = ">=3.9,<4"
+joblib = ">=1.4,<2"
+
+[tool.poetry.group.dev.dependencies]
+ruff = ">=0.11,<1"
+mypy = ">=1.15,<2"
+pytest = ">=8.3,<10"
+pytest-cov = ">=6,<8"
+pre-commit = ">=4,<5"
+pandas-stubs = ">=2.2,<3"
+
+[project.scripts]
+imdb-sentiment = "imdb_sentiment.cli:main"
+
+[build-system]
+requires = ["poetry-core>=2.0,<3"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "joblib.*", "matplotlib.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
